@@ -19,7 +19,7 @@ This package adds new custom lints to your project. These lints are agreed upon 
 
 Follow these instructions to add apn_lints to a new or existing project
 
-1. Add these 2 dependencies to your pubspec.yaml
+1. Add these 2 `dev` dependencies to your pubspec.yaml
 ```
   custom_lint: ^0.0.9
   apn_lints: ^0.0.1

@@ -4,7 +4,8 @@ import 'package:custom_lint_builder/custom_lint_builder.dart';
 
 class OnlyUseL10nInUiLint with LintContract {
   @override
-  String lintMessage(String key) => 'Translations should only be known and used in the UI layer.';
+  String lintMessage(String key) =>
+      'Translations should only be known and used in the UI layer.';
 
   @override
   Stream<Lint> getLints(ResolvedUnitResult unit) async* {
@@ -14,13 +15,17 @@ class OnlyUseL10nInUiLint with LintContract {
       return;
     }
 
-    final regex = RegExp(r'(L10n\.translate.+),');
+    final regex = RegExp(r'(L10n\.translate.+)[,;\n]');
     final matches = regex.allMatches(unit.content);
 
     for (var match in matches) {
+      final takeOne = match.group(1)?.endsWith(',') == true ||
+          match.group(1)?.endsWith(';') == true;
+      final length = match.end - match.start - (takeOne ? 1 : 0);
+
       yield toLint(
         'only_use_l10n_in_ui_lint',
-        unit.lintLocationFromOffset(match.start, length: match.end - match.start - 1),
+        unit.lintLocationFromOffset(match.start, length: length),
         severity: LintSeverity.warning,
       );
     }

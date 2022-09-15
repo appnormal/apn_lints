@@ -31,7 +31,8 @@ class LayerCheckLint extends RecursiveAstVisitor<void> with LintContract {
     final lib = element?.uri;
     if (lib is DirectiveUriWithLibrary) {
       if (fileObject.inSameLib(lib.source.toString())) {
-        imports.add(ImportObject(node.offset, node.length, lib.source.toString()));
+        imports
+            .add(ImportObject(node.offset, node.length, lib.source.toString()));
       }
     }
   }
@@ -55,9 +56,13 @@ class LayerCheckLint extends RecursiveAstVisitor<void> with LintContract {
     yield* loopOffenders(uiOffenders, 'dont_import_ui_files_in_data', unit);
   }
 
-  Stream<Lint> loopOffenders(Iterable<ImportObject> offenders, String key, ResolvedUnitResult unit) async* {
+  Stream<Lint> loopOffenders(Iterable<ImportObject> offenders, String key,
+      ResolvedUnitResult unit) async* {
     for (var offender in offenders) {
-      yield toLint(key, unit.lintLocationFromOffset(offender.offset, length: offender.length));
+      yield toLint(
+          key,
+          unit.lintLocationFromOffset(offender.offset,
+              length: offender.length));
     }
   }
 }

@@ -37,7 +37,8 @@ mixin LintContract {
 
   String lintMessage(String key);
 
-  Lint toLint(String key, LintLocation location, {LintSeverity severity = LintSeverity.error}) {
+  Lint toLint(String key, LintLocation location,
+      {LintSeverity severity = LintSeverity.error}) {
     return Lint(
       code: key,
       message: lintMessage(key),
