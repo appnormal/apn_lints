@@ -1,39 +1,35 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+This package adds new custom lints to your project. These lints are agreed upon by the appnormal team and used to enforce agreements made in internal architecture meetings.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+## Available lints
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+ - `dont_import_ui_files_in_data` <span style="color:red">*error*</span>
+ 
+  Used to indicate that the UI layer and DATA layer cannot interact with eachother. All logic needs to go through the domain layer.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+ - `dont_import_data_files_in_ui` <span style="color:red">*error*</span>
+ 
+  Used to indicate that the UI layer and DATA layer cannot interact with eachother. All logic needs to go through the domain layer.
 
-## Features
+ - `only_use_l10n_in_ui_lint` <span style="color:orange">*warning*</span>
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+  Indicates that L10n strings (translations) can only be used in the UI layer
+
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Follow these instructions to add apn_lints to a new or existing project
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
-```dart
-const like = 'sample';
+1. Add these 2 dependencies to your pubspec.yaml
+```
+  custom_lint: ^0.0.9
+  apn_lints: ^0.0.1
 ```
 
-## Additional information
+2. Add the `custom_lint` plugin to your `analysis_options.yaml` (just below the line that says  `analyzer:`)
+```
+analyzer:
+  plugins:         <-- add
+    - custom_lint  <-- add
+```
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+3. Restart analyser (or restart IDE) for the plugin to be loaded correctly
