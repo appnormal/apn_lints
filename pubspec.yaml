@@ -1,0 +1,13 @@
+name: apn_lints
+description: Custom lints used for internal Appnormal projects
+version: 0.0.1
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+dependencies:
+  analyzer:
+  custom_lint_builder:
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
